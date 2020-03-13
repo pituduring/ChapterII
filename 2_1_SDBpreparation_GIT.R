@@ -32,7 +32,7 @@ names(dat_t)
 
 #Samples in Penisnula Iberica only (PI)
 #^ character for beginning of line/string:
-dat_PI<-dat_t[!grepl("^BALEARS", dat$Province.x), ]
+dat_PI<-dat_t[!grepl("^BALEARS", dat_t$Province.x), ]
 
 #Profile carbon database to odel
 co=data.frame(co=dat_PI$TOC...., Lat=dat_PI$Latitude.x, Long=dat_PI$Longitude.x, Depth_top=dat_PI$Depth.top..m., Depth_bot=dat_PI$Depth.bot..m., ID_PROF=as.character(dat_PI$Sample.ID..Unique.identification.number......1), Id_hz=as.character(dat_PI$Position..Horizon.position.in.the.soil.....))
@@ -71,6 +71,8 @@ proj4string(dat_aqp) <- CRS("+proj=longlat +datum=WGS84")
 
 #Interpolating Carbon density values by GlobalSoilMap.net specifications
 
-try(OCS <- mpspline(dat_aqp, 'co'))
+try(OCS <- GSIF::mpspline(dat_aqp, 'co'))
 
-###ERROR!!
+###Fitting mass preserving splines per profile...
+#||   0%
+#Error : object 'p' not found
